@@ -4,7 +4,7 @@ from google.oauth2 import service_account
 import pandas as pd
 import altair as alt
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
@@ -117,49 +117,166 @@ def make_line_chart(df):
 
     return chart
 
+def make_week_chart(df):
+    df["dia_da_semana"] = ["Sunday", 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    df = pd.DataFrame(df)
+    today = datetime.now().strftime('%A')
+
+    # É CRUCIAL definir a ordem correta dos dias da semana, senão o Altair os ordenará alfabeticamente.
+    ordem_dias = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+    # --- 2. Definição das Cores ---
+    # Use as cores que preferir. Podem ser nomes de cores ou códigos hexadecimais.
+    
+
+
+    # --- 3. Criação do Gráfico com Altair ---
+    chart = alt.Chart(df).mark_circle(
+        size=300 # Tamanho dos círculos
+    ).encode(
+        # Mapeia o dia da semana para o eixo X
+        x=alt.X('dia_da_semana',
+                sort=ordem_dias, # Garante a ordem correta dos dias
+                axis=alt.Axis(
+                    title=None, # Remove o título do eixo X
+                    domain=False, # Remove a linha do eixo
+                    ticks=False, # Remove os "risquinhos" do eixo
+                    labelAngle=0, # Deixa os nomes dos dias na horizontal
+                    labelPadding=-20 # Adiciona um espaço entre o nome e o círculo
+                )
+        ),
+        # Mapeia o status (True/False) para a cor do círculo
+        color=alt.Color('meta_batida',
+                    scale=alt.Scale(
+                        domain=[True, False], # Define qual valor corresponde a qual cors
+                    ),
+                    legend=None # Remove a legenda de cores, pois é autoexplicativa
+        ),
+        opacity=alt.Opacity('meta_batida',
+                      scale=alt.Scale(
+                          domain=[True, False],
+                          range=[1.0, 0.2]  # True=100% opaco, False=30% opaco
+                      ),
+                      legend=None
+        ),
+        tooltip=[
+            alt.Tooltip('dia_da_semana', title='Dia'),
+            alt.Tooltip('meta_batida', title='Meta Batida?')
+        ],
+        stroke=alt.condition(
+            f"datum.dia_da_semana == '{today}'", # If the day is today...
+            alt.value('#FF4B4B'),                     # ...make the border white.
+            alt.value(None)                           # ...otherwise, no color.
+        ),
+        strokeWidth=alt.condition(
+            f"datum.dia_da_semana == '{today}'", # If the day is today...
+            alt.value(2),
+            alt.value(0)
+        ),
+    ).properties(
+        width=600,
+        height=100,
+        background='transparent'
+    )
+    
+    return chart
+
 
 def login_screen():
     st.subheader("Sign In.")
     st.caption("To access the app, sign in with your Google account.")
     st.button("Log in with Google", on_click=st.login, type="primary", icon=":material/login:")
 
+def finish_button(is_finished, habit, amount, habit_id):
+    def update():
+        # Fetch the habit document
+        habit_ref = db.collection("habit").document(habit_id)
+        habit_doc = habit_ref.get()
+        habit_data = habit_doc.to_dict()
+        completions = habit_data.get("completion", [])
+        today_str = date.today().strftime("%Y-%m-%d")
+        updated = False
+        for comp in completions:
+            if comp["date"] == today_str:
+                comp["amount"] = amount
+                comp["finished"] = True
+                updated = True
+        if not updated:
+            completions.append({
+                "date": today_str,
+                "amount": amount,
+                "finished": True
+            })
+        habit_ref.update({"completion": completions})
 
-def habit_container(habit):
-    with st.container(border=True, key=f"{habit['type']}Container-{habit['created_at']}"):
-        data = {
-            'Date': pd.to_datetime(
-                ['2025-07-30', '2025-07-31', '2025-08-01', '2025-08-02', '2025-08-03', '2025-08-04', '2025-08-05',
-                 '2025-08-06']),
-            'Amount': [2000, 3000, 1500, 2000, 2100, 2500, 2200, 2800]
-        }
-        dataframe = pd.DataFrame(data)
+    if not is_finished:
+        st.button("Set as done", icon=":material/check:", key=f"finishButton-{habit_id}", on_click=update)
+    else:
+        st.button("Update", icon=":material/autorenew:", key=f"finishButton-{habit_id}", on_click=update)     
 
+def habit_container(habit, habit_id):
+    amount = 0
+    with st.container(border=True, key=f"{habit['type']}Container-{habit_id}"):
         label = habit['type'].capitalize() if habit['type'] != 'custom' else habit['label']
-
         st.subheader(label)
 
         if habit['type'] == 'water' or habit['usesAmount']:
             unit = "mL" if habit['type'] == 'water' else "minutes" if habit['type'] != 'custom' else habit[
                 'measureUnit']
-            st.caption(f"Goal: 2000 mL", )
-
-        chart = make_line_chart(dataframe)
+            st.caption(f"Goal: {habit['amount']} {unit}", )
 
         chart_col, _ = st.columns([5, 2])
-
         with chart_col:
-            # Now, display the chart and tell it to fill the column it's in.
+            today = pd.Timestamp.today().normalize()
+            seven_days = pd.date_range(end=today, periods=7, freq='D')
+            amounts = []
+            
+            days_since_sunday = (today.weekday() + 1) % 7
+            start_of_week = today - timedelta(days=days_since_sunday)
+            end_of_week = start_of_week + timedelta(days=6)
+            week = pd.date_range(start=start_of_week, end=end_of_week)
+            finished = []
+            
+            completions = habit["completion"][::-1]
+            
+            for day in seven_days:
+                completion = next((comp for comp in completions if datetime.fromisoformat(comp['date']) == day), None)
+                if(completion):
+                    amounts.append(completion['amount'])
+                else:
+                    amounts.append(0)
+
+            for day in week:
+                completion = next((comp for comp in completions if datetime.fromisoformat(comp['date']) == day), None)
+                if completion and completion['finished']:
+                        finished.append(True)
+                else:
+                    finished.append(False)
+
+            if habit['type'] == 'water' or habit['usesAmount']:
+                data = {
+                    'Date': pd.to_datetime(seven_days),
+                    'Amount': amounts
+                }
+                dataframe = pd.DataFrame(data)
+                chart = make_line_chart(dataframe)
+            else:
+                data = {
+                    'meta_batida': finished
+                }
+                dataframe = pd.DataFrame(data)
+                chart = make_week_chart(dataframe)
             st.altair_chart(chart, theme="streamlit", use_container_width=True)
-        # -------------------------------------------------------------
 
         if habit['type'] == 'water' or habit['usesAmount']:
             col1, col2 = st.columns(2, vertical_alignment="bottom")
             with col1:
-                title = st.number_input("Amount", value=2000, step=100, key=f"amountInput-{habit['created_at']}")
+                amount = st.number_input("Amount", value=2000, step=100, key=f"amountInput-{habit_id}")
             with col2:
-                st.button("Set as done", icon=":material/check:", key=f"finishButton-{habit['created_at']}")
+                finish_button(finished[days_since_sunday], habit, amount, habit_id)
         else:
-            st.button("Set as done", icon=":material/check:", key=f"finishButton-{habit['created_at']}")
+            if(habit["completion"]):
+                finish_button(finished[days_since_sunday], habit, amount, habit_id)
 
 @st.dialog("Add habit")
 def addHabitDialog():
@@ -314,9 +431,9 @@ else:
     if st.button("Add habit", icon=":material/add:", type="primary"):
         addHabitDialog()
     if habitsFromUser.count().get()[0][0].value > 0:
-        habits = habitsFromUser.order_by("created_at").stream()
+        habits = habitsFromUser.order_by(field_path="created_at").stream()
         for habitRef in habits:
             habit = habitRef.to_dict()
-            habit_container(habit)
+            habit_container(habit, habitRef.id)
     else:
         st.header("You have no habits yet.")
