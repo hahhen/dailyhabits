@@ -71,6 +71,46 @@ page_bg_img = '''
             opacity: 0.3; /* Adjust transparency for the background image */
             z-index: 0; /* Place it behind the content */
         }
+        
+        [class*="st-key-meditationContainer"]{
+            position: relative;
+        }
+
+        [class*="st-key-meditationContainer"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzg0RkY4NCIgZD0iTTYuOCAyMGMtLjUgMC0uOTItLjE4LTEuMjctLjUyYTEuNzggMS43OCAwIDAgMSAuNTctMi45M0wxMCAxNXYtMi4yNUE4Ljk5IDguOTkgMCAwIDEgMyAxNnYtMmMxLjEzIDAgMi4xNi0uMjMgMy4wOS0uN2E4LjIyIDguMjIgMCAwIDAgMi41MS0ybDEuMzUtMS42Yy4yLS4yMy40My0uNC43LS41Mi4yNy0uMTIuNTUtLjE4Ljg1LS4xOGgxYy4zIDAgLjU4LjA2Ljg1LjE4LjI3LjExLjUuMjkuNy41MmwxLjM1IDEuNmE4LjIyIDguMjIgMCAwIDAgMi41MSAyYy45My40NyAxLjk2LjcgMy4wOS43djJhOC45OSA4Ljk5IDAgMCAxLTctMy4yNVYxNWwzLjkgMS41NWExLjc4IDEuNzggMCAwIDEgLjU4IDIuOTNjLS4zNi4zNC0uNzguNTItMS4yOC41MkgxMHYtLjVhMS40NiAxLjQ2IDAgMCAxIDEuNS0xLjVoM2MuMTUgMCAuMjctLjA1LjM2LS4xNC4xLS4wOS4xNC0uMjEuMTQtLjM2YS40OS40OSAwIDAgMC0uMTQtLjM2LjQ5LjQ5IDAgMCAwLS4zNi0uMTRoLTNjLS43IDAtMS4zLjI0LTEuNzguNzNBMi40MSAyLjQxIDAgMCAwIDkgMTkuNXYuNUg2LjhaTTEyIDhjLS41NSAwLTEuMDItLjItMS40MS0uNTktLjQtLjM5LS41OS0uODYtLjU5LTEuNDEgMC0uNTUuMi0xLjAyLjU5LTEuNDEuMzktLjQuODYtLjU5IDEuNDEtLjU5LjU1IDAgMS4wMi4yIDEuNDEuNTkuNC4zOS41OS44Ni41OSAxLjQxIDAgLjU1LS4yIDEuMDItLjU5IDEuNDEtLjM5LjQtLjg2LjU5LTEuNDEuNTlaIi8+PC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right center;
+            pointer-events: none;
+            opacity: 0.3; /* Adjust transparency for the background image */
+            z-index: 0; /* Place it behind the content */
+        }
+        
+        [class*="st-key-studyContainer"]{
+            position: relative;
+        }
+
+        [class*="st-key-studyContainer"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuNSAyMkM2LjUzMzMzIDIyIDUuNzA4MzMgMjEuNjU4MyA1LjAyNSAyMC45NzVDNC4zNDE2NyAyMC4yOTE3IDQgMTkuNDY2NyA0IDE4LjVWNS41QzQgNC41MzMzMyA0LjM0MTY3IDMuNzA4MzMgNS4wMjUgMy4wMjVDNS43MDgzMyAyLjM0MTY3IDYuNTMzMzMgMiA3LjUgMkgyMFYxN0MxOS41ODMzIDE3IDE5LjIyOTIgMTcuMTQ1OCAxOC45Mzc1IDE3LjQzNzVDMTguNjQ1OCAxNy43MjkyIDE4LjUgMTguMDgzMyAxOC41IDE4LjVDMTguNSAxOC45MTY3IDE4LjY0NTggMTkuMjcwOCAxOC45Mzc1IDE5LjU2MjVDMTkuMjI5MiAxOS44NTQyIDE5LjU4MzMgMjAgMjAgMjBWMjJINy41Wk03LjUgMjBIMTYuODI1QzE2LjcyNSAxOS43NjY3IDE2LjY0NTggMTkuNTI5MiAxNi41ODc1IDE5LjI4NzVDMTYuNTI5MiAxOS4wNDU4IDE2LjUgMTguNzgzMyAxNi41IDE4LjVDMTYuNSAxOC4yMzMzIDE2LjUyNSAxNy45NzUgMTYuNTc1IDE3LjcyNUMxNi42MjUgMTcuNDc1IDE2LjcwODMgMTcuMjMzMyAxNi44MjUgMTdINy41QzcuMDY2NjcgMTcgNi43MDgzMyAxNy4xNDU4IDYuNDI1IDE3LjQzNzVDNi4xNDE2NyAxNy43MjkyIDYgMTguMDgzMyA2IDE4LjVDNiAxOC45MzMzIDYuMTQxNjcgMTkuMjkxNyA2LjQyNSAxOS41NzVDNi43MDgzMyAxOS44NTgzIDcuMDY2NjcgMjAgNy41IDIwWiIgZmlsbD0iI0ZCRkY4RSIvPgo8L3N2Zz4K');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right center;
+            pointer-events: none;
+            opacity: 0.3; /* Adjust transparency for the background image */
+            z-index: 0; /* Place it behind the content */
+        }
 
     </style>
     '''
@@ -82,7 +122,6 @@ def make_line_chart(df):
         height=100,
     )
 
-    # Create the blue line chart
     line = base.mark_line().encode(
         x=alt.X('Date:T', axis=alt.Axis(format='%b %d', grid=False, title=None, labelAngle=0)),
         y=alt.Y('Amount:Q', axis=alt.Axis(grid=True, title=None))
@@ -92,13 +131,10 @@ def make_line_chart(df):
         nearest=True, on='mouseover', fields=['Date']
     )
 
-    # Create the points that will be shown on hover
-    # We use alt.condition to change the opacity based on the selector
     points = line.mark_point(filled=True).encode(
         opacity=alt.condition(nearest_selector, alt.value(1), alt.value(0))
     )
 
-    # Create an invisible rule that will be used for the tooltip and to activate the selector
     hover_rule = base.mark_rule(color='transparent').encode(
         x='Date:T',
         tooltip=[alt.Tooltip('Date:T', format='%A, %B %d'), 'Amount:Q']
@@ -106,7 +142,6 @@ def make_line_chart(df):
         nearest_selector
     )
 
-    # Layer the line, the points, and the hover rule.
     chart = alt.layer(
         line, points, hover_rule
     ).configure(
@@ -118,58 +153,49 @@ def make_line_chart(df):
     return chart
 
 def make_week_chart(df):
-    df["dia_da_semana"] = ["Sunday", 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    df["day_of_the_week"] = ["Sunday", 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     df = pd.DataFrame(df)
     today = datetime.now().strftime('%A')
 
-    # É CRUCIAL definir a ordem correta dos dias da semana, senão o Altair os ordenará alfabeticamente.
-    ordem_dias = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    day_order = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-    # --- 2. Definição das Cores ---
-    # Use as cores que preferir. Podem ser nomes de cores ou códigos hexadecimais.
-    
-
-
-    # --- 3. Criação do Gráfico com Altair ---
     chart = alt.Chart(df).mark_circle(
-        size=300 # Tamanho dos círculos
+        size=300
     ).encode(
-        # Mapeia o dia da semana para o eixo X
-        x=alt.X('dia_da_semana',
-                sort=ordem_dias, # Garante a ordem correta dos dias
+        x=alt.X('day_of_the_week',
+                sort=day_order,
                 axis=alt.Axis(
-                    title=None, # Remove o título do eixo X
-                    domain=False, # Remove a linha do eixo
-                    ticks=False, # Remove os "risquinhos" do eixo
-                    labelAngle=0, # Deixa os nomes dos dias na horizontal
-                    labelPadding=-20 # Adiciona um espaço entre o nome e o círculo
+                    title=None,
+                    domain=False,
+                    ticks=False,
+                    labelAngle=0,
+                    labelPadding=-20
                 )
         ),
-        # Mapeia o status (True/False) para a cor do círculo
-        color=alt.Color('meta_batida',
+        color=alt.Color('finished_day',
                     scale=alt.Scale(
-                        domain=[True, False], # Define qual valor corresponde a qual cors
+                        domain=[True, False],
                     ),
-                    legend=None # Remove a legenda de cores, pois é autoexplicativa
+                    legend=None 
         ),
-        opacity=alt.Opacity('meta_batida',
+        opacity=alt.Opacity('finished_day',
                       scale=alt.Scale(
                           domain=[True, False],
-                          range=[1.0, 0.2]  # True=100% opaco, False=30% opaco
+                          range=[1.0, 0.2] 
                       ),
                       legend=None
         ),
         tooltip=[
-            alt.Tooltip('dia_da_semana', title='Dia'),
-            alt.Tooltip('meta_batida', title='Meta Batida?')
+            alt.Tooltip('day_of_the_week', title='Day'),
+            alt.Tooltip('finished_day', title='Done?')
         ],
         stroke=alt.condition(
-            f"datum.dia_da_semana == '{today}'", # If the day is today...
-            alt.value('#FF4B4B'),                     # ...make the border white.
-            alt.value(None)                           # ...otherwise, no color.
+            f"datum.day_of_the_week == '{today}'",
+            alt.value('#FF4B4B'),
+            alt.value(None)                     
         ),
         strokeWidth=alt.condition(
-            f"datum.dia_da_semana == '{today}'", # If the day is today...
+            f"datum.day_of_the_week == '{today}'",
             alt.value(2),
             alt.value(0)
         ),
@@ -189,7 +215,6 @@ def login_screen():
 
 def finish_button(is_finished, habit, amount, habit_id):
     def update():
-        # Fetch the habit document
         habit_ref = db.collection("habit").document(habit_id)
         habit_doc = habit_ref.get()
         habit_data = habit_doc.to_dict()
@@ -212,14 +237,106 @@ def finish_button(is_finished, habit, amount, habit_id):
     if not is_finished:
         st.button("Set as done", icon=":material/check:", key=f"finishButton-{habit_id}", on_click=update)
     else:
-        st.button("Update", icon=":material/autorenew:", key=f"finishButton-{habit_id}", on_click=update)     
+        st.button("Update", icon=":material/autorenew:", key=f"finishButton-{habit_id}", on_click=update)
+
+def delete_habit(habit_id):
+    habit_ref = db.collection("habit").document(habit_id)
+    habit_ref.delete()
+
+@st.dialog("Edit habit")
+def edit_habit(habit_id, habit):
+    amount = habit.get("amount", 0)
+    measure_unit = habit.get("measureUnit", "")
+    time_toggle = habit.get("usesAmount", False)
+    habit_label = habit.get("label", "")
+    measure_amount = habit.get("amount", 0)
+    measure_toggle = habit.get("usesAmount", False)
+
+    if habit['type'] == "water":
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            amount = st.number_input("Amount", value=2000, step=100)
+        with col2:
+            st.write("##")
+            st.write("mL")
+
+    elif habit['type'] == "exercise":
+        time_toggle = st.toggle("Set amount of time?", time_toggle)
+
+        if time_toggle:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                amount = st.number_input("Time", value=60, step=10)
+            with col2:
+                st.write("##")
+                st.write("minutes")
+
+    elif habit['type'] == "study":
+        time_toggle = st.toggle("Set amount of time?", time_toggle)
+
+        if time_toggle:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                amount = st.number_input("Time", value=60, step=10)
+            with col2:
+                st.write("##")
+                st.write("minutes")
+
+    elif habit['type'] == "meditation":
+        time_toggle = st.toggle("Set amount of time?", time_toggle)
+
+        if time_toggle:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                amount = st.number_input("Time", value=60, step=10)
+            with col2:
+                st.write("##")
+                st.write("minutes")
+
+    elif habit['type'] == "custom":
+        habit_label = st.text_input("Habit", value=habit_label)
+        measure_toggle = st.toggle("Set measuring unit?", measure_toggle)
+        if measure_toggle:
+            col1, col2 = st.columns([3, 1])
+            with col1:
+                amount = st.number_input("Amount", value=amount)
+            with col2:
+                measure_unit = st.text_input("Unit", value=measure_unit)
+
+    if st.button("Save"):
+        habit_ref = db.collection("habit").document(habit_id)
+        habit_ref.update({
+            "label": habit_label,
+            "amount": amount,
+            "measureUnit": measure_unit,
+            "usesAmount": measure_toggle if habit['type'] == 'custom' else time_toggle,
+            "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        })
+
+
+def largest_power_of_10(n):
+        if n == 0:
+            return 1
+        power = 1
+        while n % 10 == 0:
+            power *= 10
+            n //= 10
+        return power
 
 def habit_container(habit, habit_id):
     amount = 0
+    magnitude = largest_power_of_10(habit["amount"])
     with st.container(border=True, key=f"{habit['type']}Container-{habit_id}"):
         label = habit['type'].capitalize() if habit['type'] != 'custom' else habit['label']
-        st.subheader(label)
-
+        hcol1, hcol2 = st.columns([10, 1])
+        with hcol1:
+            st.subheader(label)
+        with hcol2:
+            with st.popover("",icon=":material/menu:"):
+                if st.button("Delete", key=f"deleteButton-{habit_id}", icon=":material/delete:", use_container_width=True):
+                    delete_habit(habit_id)
+                if st.button("Edit", key=f"editButton-{habit_id}", icon=":material/edit:", use_container_width=True):
+                    edit_habit(habit_id, habit)
         if habit['type'] == 'water' or habit['usesAmount']:
             unit = "mL" if habit['type'] == 'water' else "minutes" if habit['type'] != 'custom' else habit[
                 'measureUnit']
@@ -262,7 +379,7 @@ def habit_container(habit, habit_id):
                 chart = make_line_chart(dataframe)
             else:
                 data = {
-                    'meta_batida': finished
+                    'finished_day': finished
                 }
                 dataframe = pd.DataFrame(data)
                 chart = make_week_chart(dataframe)
@@ -271,7 +388,7 @@ def habit_container(habit, habit_id):
         if habit['type'] == 'water' or habit['usesAmount']:
             col1, col2 = st.columns(2, vertical_alignment="bottom")
             with col1:
-                amount = st.number_input("Amount", value=2000, step=100, key=f"amountInput-{habit_id}")
+                amount = st.number_input("Amount", value=habit["amount"], step=int(magnitude/10), key=f"amountInput-{habit_id}")
             with col2:
                 finish_button(finished[days_since_sunday], habit, amount, habit_id)
         else:
