@@ -2,6 +2,7 @@
 
 ![Made with Streamlit](https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![GitHub top language](https://img.shields.io/github/languages/top/hahhen/dailyhabits)
+![Made with Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=Firebase&logoColor=white)
 
 
 
